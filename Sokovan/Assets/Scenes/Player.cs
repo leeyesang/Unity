@@ -6,6 +6,8 @@ public class Player : MonoBehaviour{
 
     float speed = 10f;
     Rigidbody playerRigidbody;
+    public GameManager gameManager;
+  
 
     void Start()
     {   
@@ -16,23 +18,11 @@ public class Player : MonoBehaviour{
 
     void Update()
     {
-        //유저 입력을 받음
-        /*if(Input.GetKey(KeyCode.W))
+        if (gameManager.isGameOver ==  true)
         {
-            playerRigidbody.AddForce(0, 0, speed);
+            return;
         }
-        if (Input.GetKey(KeyCode.A))
-        {
-            playerRigidbody.AddForce(-speed, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            playerRigidbody.AddForce(0, 0, -speed);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            playerRigidbody.AddForce(speed, 0, 0);
-        }*/
+
 
         //-1 ~ +1
         float inputX = Input.GetAxis("Horizontal"); //좌우
