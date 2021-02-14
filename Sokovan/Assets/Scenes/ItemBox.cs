@@ -7,6 +7,8 @@ public class ItemBox : MonoBehaviour
     private Renderer myRenderer;
     public Color touchColor;
     private Color originColor;
+
+    public bool isOveraped = false;
     void Start()
     {
         myRenderer = GetComponent<Renderer>();
@@ -22,8 +24,9 @@ public class ItemBox : MonoBehaviour
     {
         if(other.tag == "EndPoint")
         {
+            isOveraped = true;
             myRenderer.material.color = Color.blue;
-            Debug.Log("EndPOint 도달");
+            //Debug.Log("EndPOint 도달");
         }
     }
 
@@ -31,6 +34,7 @@ public class ItemBox : MonoBehaviour
     {
         if (other.tag == "EndPoint")
         {
+            isOveraped = false;
             myRenderer.material.color = originColor;
             //Debug.Log("EndPOint 도달");
         }
@@ -40,6 +44,7 @@ public class ItemBox : MonoBehaviour
     {
         if (other.tag == "EndPoint")
         {
+            isOveraped = true;
             myRenderer.material.color = touchColor;
            // Debug.Log("EndPOint 도달");
         }
