@@ -4,20 +4,50 @@ using UnityEngine;
 
 public class Player : MonoBehaviour{
 
-    public float speed = 10f;
-    public Rigidbody playerRigidbody;
+    float speed = 10f;
+    Rigidbody playerRigidbody;
 
- 
-
-    // Start is called before the first frame update
     void Start()
-    {
-        playerRigidbody.AddForce(0, 1000, 0);
+    {   
+        //inspector에서 보이지 않도록 하기 위하여 지정
+        // Rigidbody를 찾아다님.
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        //유저 입력을 받음
+        /*if(Input.GetKey(KeyCode.W))
+        {
+            playerRigidbody.AddForce(0, 0, speed);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            playerRigidbody.AddForce(-speed, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            playerRigidbody.AddForce(0, 0, -speed);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            playerRigidbody.AddForce(speed, 0, 0);
+        }*/
+
+        //-1 ~ +1
+        float inputX = Input.GetAxis("Horizontal"); //좌우
+        float inputZ = Input.GetAxis("Vertical"); //상하
+        float fallSpeed = playerRigidbody.velocity.y;
+
+        //playerRigidbody.AddForce(inputX * speed, 0, inputZ * speed);
+        //AddForce는 누적 즉 관성이 붙는다.
+
+        Vector3 velocity = new Vector3(inputX, 0, inputZ);
+
+        //(inputX * speed, 0, inputZ * speed);
+        velocity = velocity * speed;
+        velocity.y = fallSpeed;
+
+        playerRigidbody.velocity = velocity;
     }
 }
